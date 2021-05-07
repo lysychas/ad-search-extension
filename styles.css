@@ -1,6 +1,7 @@
 .container {
   margin: 1.5em;
   text-align: center;
+  min-width: 400px;
 }
 
 ul.results {
