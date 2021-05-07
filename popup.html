@@ -6,18 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body class="container">
-  <form class="form" autocomplete="on">
-    <div class="enter-keyword">
+  <form class="form" autocomplete="off">
+    <div class="row enter-keyword">
       Enter a keyword to get ad links:
     </div>
-    <div>
-      <input type="text" placeholder="Search..." class="search-bar" name="search" />
+    <div class="row">
+      <input type="text" placeholder="Search..." class="col-9 search-bar" name="search" />
+      <button type="submit" class=" col btn btn-primary">Search</button>
     </div>
-    <button type="submit" class="search-btn">Search</button>
   </form>
   <ul class="results"></ul>
 
