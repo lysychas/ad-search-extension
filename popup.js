@@ -18,8 +18,8 @@ const searchAds = async (keyword) => {
       fetch(`${api}/search/all`)
         .then((res) => res.json())
         .then((data) => {
-          data.forEach((entry) => {
-            listAds(entry);
+          data.forEach((entry, index) => {
+            listAds(entry, index);
           });
         });
     } catch (error) {
@@ -36,8 +36,8 @@ const searchAds = async (keyword) => {
           results.innerHTML =
             'Could not get data, try searching for something else.';
         }
-        data.forEach((entry) => {
-          listAds(entry);
+        data.forEach((entry, index) => {
+          listAds(entry, index);
         });
       });
   } catch (error) {
@@ -53,8 +53,10 @@ const handleSubmit = async (e) => {
 
 form.addEventListener('submit', (e) => handleSubmit(e));
 
-function listAds(entry) {
+function listAds(entry, index) {
   let li = document.createElement('li');
+  li.classList = 'ad';
+  li.id = index;
   let link = document.createElement('a');
   let desc = document.createElement('p');
 
