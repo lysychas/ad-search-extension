@@ -1,8 +1,8 @@
 const api = 'https://ad-search-extension.herokuapp.com';
-// const api = 'http://localhost:3000';
 const form = document.querySelector('.form');
 const keyword = document.querySelector('.search-bar');
 const results = document.querySelector('.results');
+const enterKeyword = document.querySelector('.enter-keyword');
 
 // declare a method to search by country name
 const searchAds = async (keyword) => {
@@ -19,6 +19,7 @@ const searchAds = async (keyword) => {
         .then((res) => res.json())
         .then((data) => {
           data.forEach((entry, index) => {
+            enterKeyword.innerHTML = `Showing all ads:`;
             listAds(entry, index);
           });
         });
@@ -43,6 +44,22 @@ const searchAds = async (keyword) => {
   } catch (error) {
     results.innerHTML = error;
   }
+
+  try {
+    fetch(`${api}/keyword`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ keyword: keyword }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length != 0) {
+          showPopularity(data);
+        } else enterKeyword.innerHTML = `New keyword added!`;
+      });
+  } catch {
+    enterKeyword.innerHTML = 'Could not get keyword search data';
+  }
 };
 
 // declare a function to handle form submission
@@ -57,17 +74,28 @@ function listAds(entry, index) {
   let li = document.createElement('li');
   li.classList = 'ad';
   li.id = index;
-  let link = document.createElement('a');
-  let desc = document.createElement('p');
 
+  let link = document.createElement('a');
   link.href = entry.link;
   link.innerText = entry.title;
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
 
+  let div = document.createElement('div');
+  let score = document.createElement('small');
+  if (entry.score) score.innerText = 'Score: ' + entry.score;
+  div.append(score);
+
+  let desc = document.createElement('p');
   desc.innerText = entry.description;
 
   li.append(link);
+  li.append(div);
   li.append(desc);
   results.appendChild(li);
+}
+
+function showPopularity(data) {
+  timesSearched = data[0].searched;
+  enterKeyword.innerHTML = `Times searched: ${timesSearched}`;
 }
