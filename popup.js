@@ -9,7 +9,7 @@ const enterKeyword = document.querySelector('.enter-keyword');
 const searchAds = async (keyword) => {
   results.innerHTML = '';
 
-  if (!keyword.trim()) {
+  if (!keyword.trim() || keyword.length < 2) {
     results.innerHTML = 'Could not get data, try searching for something.';
     return;
   }
