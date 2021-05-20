@@ -1,4 +1,5 @@
-const api = 'https://ad-search-extension.herokuapp.com';
+// const api = 'https://ad-search-extension.herokuapp.com';
+const api = 'http://localhost:3000';
 const form = document.querySelector('.form');
 const keyword = document.querySelector('.search-bar');
 const results = document.querySelector('.results');
@@ -83,7 +84,7 @@ function listAds(entry, index) {
 
   let div = document.createElement('div');
   let score = document.createElement('small');
-  if (entry.score) score.innerText = 'Score: ' + entry.score;
+  if (entry.score) score.innerText = 'Score: ' + round(entry.score / 2, 3);
   div.append(score);
 
   let desc = document.createElement('p');
@@ -98,4 +99,8 @@ function listAds(entry, index) {
 function showPopularity(data) {
   timesSearched = data[0].searched;
   enterKeyword.innerHTML = `Times searched: ${timesSearched}`;
+}
+
+function round(value, decimals) {
+  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
 }
