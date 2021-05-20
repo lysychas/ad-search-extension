@@ -1,5 +1,5 @@
-// const api = 'https://ad-search-extension.herokuapp.com';
-const api = 'http://localhost:3000';
+const api = 'https://ad-search-extension.herokuapp.com';
+// const api = 'http://localhost:3000';
 const form = document.querySelector('.form');
 const keyword = document.querySelector('.search-bar');
 const results = document.querySelector('.results');
